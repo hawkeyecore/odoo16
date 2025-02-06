@@ -1,0 +1,10 @@
+<record id="view_users_simplified_form_inherit" model="ir.ui.view">
+    <field name="name">res.users.form.custom.groups</field>
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base.view_users_form"/> <!-- Adjust if needed -->
+    <field name="arch" type="xml">
+        <xpath expr="//field[@name='groups_id']" position="after">
+            <field name="custom_group_ids" widget="many2many_tags" placeholder="Select custom groups..." options="{'color_field': 'color'}"/>
+        </xpath>
+    </field>
+</record>

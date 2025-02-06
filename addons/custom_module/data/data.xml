@@ -1,0 +1,12 @@
+<odoo>
+    <data noupdate="1">
+        <record id="default_job_request" model="job.request">
+            <field name="name">Sample Job Request</field>
+            <field name="description">This is a sample job request</field>
+            <field name="status">new_job</field>
+            <field name="start_date">2025-01-01 10:00:00</field>
+            <field name="submitted_by" ref="base.res_partner_1"/>
+            <field name="job_completed"/>
+        </record>
+    </data>
+</odoo>

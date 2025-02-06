@@ -1,0 +1,37 @@
+<odoo>
+    <!-- Customer Rule -->
+    <record id="job_request_rule_customer" model="ir.rule">
+        <field name="name">Job Request - Customer</field>
+        <field name="model_id" ref="model_job_request"/>
+        <field name="groups" eval="[(4, ref('custom_module.group_customer'))]"/>
+        <field name="domain_force">[('submitted_by', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+
+    <!-- Manager Rule -->
+    <record id="job_request_rule_manager" model="ir.rule">
+        <field name="name">Job Request - Manager</field>
+        <field name="model_id" ref="model_job_request"/>
+        <field name="groups" eval="[(4, ref('custom_module.group_manager'))]"/>
+        <field name="domain_force">[]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="1"/>
+        <field name="perm_unlink" eval="1"/>
+    </record>
+
+    <!-- Employee Rule -->
+    <record id="job_request_rule_employee" model="ir.rule">
+        <field name="name">Job Request - Employee</field>
+        <field name="model_id" ref="model_job_request"/>
+        <field name="groups" eval="[(4, ref('custom_module.group_employee'))]"/>
+        <field name="domain_force">[('assigned_user_id', '=', user.id)]</field>
+        <field name="perm_read" eval="1"/>
+        <field name="perm_write" eval="1"/>
+        <field name="perm_create" eval="0"/>
+        <field name="perm_unlink" eval="0"/>
+    </record>
+</odoo>
