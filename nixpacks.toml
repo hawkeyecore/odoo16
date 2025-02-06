@@ -1,0 +1,2 @@
+[phases.setup]
+nixPkgs = ["openldap", "libsasl2", "gcc", "libxcrypt", "python312Packages.ldap3"]
