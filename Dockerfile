@@ -7,6 +7,8 @@ WORKDIR /usr/lib/python3/dist-packages/odoo
 # Copy your custom Odoo files (if any)
 COPY addons/custom_module/ /mnt/extra-addons
 
+COPY config/odoo.conf /etc/odoo/odoo.conf
+
 # Set environment variables for database connection (from Railway)
 ENV HOST=$DB_HOST
 ENV USER=$DB_USER
@@ -16,4 +18,4 @@ ENV PASSWORD=$DB_PASSWORD
 EXPOSE 8069
 
 # Start Odoo with correct database connection
-CMD ["sh", "-c", "odoo --db_host=$PGHOST --db_user=$POSTGRES_USER --db_password=$POSTGRES_PASSWORD --db_port=$(echo $PGPORT) --database=$POSTGRES_DB"]
+CMD ["odoo", "--config=/etc/odoo/odoo.conf"]
