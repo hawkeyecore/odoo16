@@ -16,4 +16,4 @@ ENV PASSWORD=$DB_PASSWORD
 EXPOSE 8069
 
 # Start Odoo with correct database connection
-CMD ["odoo", "--db_host=${PGHOST}", "--db_user=${POSTGRES_USER}", "--db_password=${POSTGRES_PASSWORD}", "--db_port=${PGPORT}", "--database=${POSTGRES_DB}"]
+CMD ["sh", "-c", "odoo --db_host=$PGHOST --db_user=$POSTGRES_USER --db_password=$POSTGRES_PASSWORD --db_port=$(echo $PGPORT) --database=$POSTGRES_DB"]
