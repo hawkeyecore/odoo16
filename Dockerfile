@@ -18,4 +18,4 @@ ENV PASSWORD=$DB_PASSWORD
 EXPOSE 8069
 
 # Start Odoo with correct database connection
-CMD ["odoo", "--config=/etc/odoo/odoo.conf"]
+CMD ["python3", "odoo-bin", "--config=/etc/odoo.conf"]
