@@ -1,0 +1,28 @@
+<odoo>
+    <record id="category_management_roles" model="ir.module.category">
+        <field name="name">Management Roles</field>
+        <field name="sequence" eval="10"/>
+<!--        <field name="visible" eval="True" />-->
+
+
+    </record>
+
+    <!-- Customer Group -->
+    <record id="group_customer" model="res.groups">
+        <field name="name">Customer</field>
+        <field name="category_id" ref="category_management_roles"/>
+    </record>
+
+    <!-- Manager Group -->
+    <record id="group_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="category_management_roles"/>
+    </record>
+
+    <!-- Employee Group -->
+    <record id="group_employee" model="res.groups">
+        <field name="name">Employee</field>
+        <field name="category_id" ref="category_management_roles"/>
+    </record>
+
+</odoo>

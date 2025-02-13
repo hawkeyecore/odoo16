@@ -18,11 +18,32 @@ class JobRequest(models.Model):
         ('completed', 'Completed'),
     ], string='Status', default='new_job')
 
+    project_id = fields.Many2one('project.monitor',string="Project")
     submitted_by = fields.Many2one(
     'res.users',
     string='Customer',
     default=lambda self: self.env.user
     )
+
+    status_date = fields.Selection([
+        ('green', 'Green'),
+        ('yellow', 'Yellow'),
+        ('red', 'Red'),
+    ], string='Status', compute='_compute_status', store=True)
+
+    @api.depends('end_date')
+    def _compute_status(self):
+        for record in self:
+            if record.end_date:
+                today = datetime.now()
+                due_days = (record.end_date - today).days
+
+                if due_days > 7:
+                    record.status_date = 'green'
+                elif 0 <= due_days <= 7:
+                    record.status_date = 'yellow'
+                else:
+                    record.status_date = 'red'
 
     @api.model
     def create(self, vals):
@@ -64,7 +85,7 @@ class JobRequest(models.Model):
 
     def action_reassign(self, new_employee_id):
         """Allow managers to reassign jobs."""
-        if self.env.user.has_group('custom_module.group_manager'):
+        if self.env.user.has_group('scheduling_dispatch.group_manager'):
             self.assigned_user_id = new_employee_id
 
     @api.constrains('start_date', 'end_date')
@@ -74,7 +95,7 @@ class JobRequest(models.Model):
                 raise ValidationError("The start date cannot be after the end date.")
 
     def action_complete_job(self):
-        if self.env.user.has_group('custom_module.group_manager'):
+        if self.env.user.has_group('scheduling_dispatch.group_manager'):
             self.status = 'completed'
 
     @api.depends('status')
@@ -102,12 +123,12 @@ class JobRequest(models.Model):
             job_name = record.name or "Missing Job Title"
             customer_name = (
                 record.submitted_by.name
-                if self.env.user.has_group('custom_module.group_manager')
+                if self.env.user.has_group('scheduling_dispatch.group_manager')
                 else "Restricted"
             )
             employee_name = (
                 record.assigned_user_id.name
-                if self.env.user.has_group('custom_module.group_manager')
+                if self.env.user.has_group('scheduling_dispatch.group_manager')
                 else "Restricted"
             )
             record.display_name = f"{job_name} - {customer_name} - {employee_name}"
