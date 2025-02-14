@@ -2,7 +2,7 @@
     <record id="action_job_calendar" model="ir.actions.act_window">
         <field name="name">Job Calendar</field>
         <field name="res_model">job.request</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">calendar,tree,form</field>
     </record>
 
     <record id="view_job_calendar_tree" model="ir.ui.view">
@@ -48,15 +48,15 @@
             </form>
         </field>
     </record>
-<!--    <record id="view_job_calendar_calendar" model="ir.ui.view">-->
-<!--        <field name="name">job.request.calendar</field>-->
-<!--        <field name="model">job.request</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <calendar string="Job Calendar" date_start="start_date" date_stop="end_date" color="color">-->
-<!--                <field name="display_name" readonly="1" invisible="1" groups="scheduling _dispatch .group_manager"/>-->
-<!--            </calendar>-->
-<!--        </field>-->
-<!--    </record>-->
+    <record id="view_job_calendar_calendar" model="ir.ui.view">
+        <field name="name">job.request.calendar</field>
+        <field name="model">job.request</field>
+        <field name="arch" type="xml">
+            <calendar string="Job Calendar" date_start="start_date" date_stop="end_date" color="color">
+                <field name="display_name" readonly="1" invisible="1" groups="scheduling_dispatch.group_manager"/>
+            </calendar>
+        </field>
+    </record>
     <menuitem id="menu_job_request_root" name="Scheduling Dispatch App" sequence="30"/>
     <menuitem id="menu_job_calendar" name="Job Calendar" parent="menu_job_request_root" action="action_job_calendar"
               sequence="40"/>
