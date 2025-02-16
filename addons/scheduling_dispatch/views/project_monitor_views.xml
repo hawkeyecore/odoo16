@@ -9,10 +9,16 @@
         <field name="name">Project Monitor</field>
         <field name="model">project.monitor</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree string="Project Monitor"
+
+             >
                 <field name="name"/>
-                <field name="job_requests" widget="many2many_tags" options="{'no_create': True}"/>
+                <field name="job_requests" widget="many2many_tags"/>
                 <field name="assigned_customer_id"/>
+                <field  decoration-warning="next_7_days &gt; 0" name="next_7_days"/>
+                <field decoration-success="after_7_days &gt; 0" name="after_7_days"/>
+                <field  decoration-danger="overdue_jobs &gt; 0" name="overdue_jobs"/>
+                <field name="total_jobs"/>
             </tree>
         </field>
     </record>
@@ -23,18 +29,29 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="job_requests" widget="many2many_tags"/>
-                        <field name="assigned_customer_id"
-                             />
 
+
+                        <group>
+                            <field name="name"/>
+                            <field name="job_requests" options="{'no_create': True}" widget="many2many_tags"/>
+                            <field name="assigned_customer_id"
+                            />
+
+                        </group>
+                        <group>
+                            <field name="total_jobs"/>
+                            <field name="next_7_days"/>
+                            <field name="after_7_days"/>
+                            <field name="overdue_jobs"/>
+                        </group>
                     </group>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <menuitem id="menu_project_monitor" name="Project Monitor" parent="scheduling_dispatch.menu_job_request_root" groups="scheduling_dispatch.group_manager"
+    <menuitem id="menu_project_monitor" name="Project Manager" parent="scheduling_dispatch.menu_job_request_root"
+              groups="scheduling_dispatch.group_manager"
               action="action_project_monitor" sequence="40"/>
 
 
@@ -45,12 +62,12 @@
         <field name="arch" type="xml">
             <page name="preferences" position="after">
                 <page name="projects" string="Projects">
-                        <field name="user_projects" readonly="1">
-                            <tree>
-                                <field name="name"/>
-                                <field name="job_requests" widget="many2many_tags"/>
-                            </tree>
-                        </field>
+                    <field name="user_projects" readonly="1">
+                        <tree>
+                            <field name="name"/>
+                            <field name="job_requests" widget="many2many_tags"/>
+                        </tree>
+                    </field>
                 </page>
             </page>
         </field>

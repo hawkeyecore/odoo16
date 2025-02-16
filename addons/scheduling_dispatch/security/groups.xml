@@ -6,7 +6,7 @@
         <field name="visible" eval="True"/>
     </record>
     <record id="category_customer_roles" model="ir.module.category">
-        <field name="name">Custom</field>
+        <field name="name">Customer</field>
         <field name="sequence" eval="10"/>
         <field name="visible" eval="True"/>
     </record>

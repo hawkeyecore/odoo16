@@ -10,15 +10,20 @@ class JobRequest(models.Model):
     _description = 'Job Request'
 
     name = fields.Char(string='Job Title', required=True)
+    project_id = fields.Many2one('project.monitor', string="Project")
     description = fields.Text(string='Test() Description')
     status = fields.Selection([
         ('new_job', 'New Job'),
+        ('accept_job', 'Accept Job'),
         ('in_progress', 'In Progress'),
         ('rescheduled', 'Rescheduled'),
         ('completed', 'Completed'),
+        ('close', 'Close'),
     ], string='Status', default='new_job')
 
-    project_id = fields.Many2one('project.monitor',string="Project")
+
+
+
     submitted_by = fields.Many2one(
     'res.users',
     string='Customer',
@@ -31,24 +36,32 @@ class JobRequest(models.Model):
         ('red', 'Red'),
     ], string='Status', compute='_compute_status', store=True)
 
-    @api.depends('end_date')
+    @api.depends('start_date', 'create_date')
     def _compute_status(self):
         for record in self:
-            if record.end_date:
-                today = datetime.now()
-                due_days = (record.end_date - today).days
+            if not record.start_date or not record.create_date:
+                record.status_date = False
+                continue
 
-                if due_days > 7:
-                    record.status_date = 'green'
-                elif 0 <= due_days <= 7:
-                    record.status_date = 'yellow'
-                else:
-                    record.status_date = 'red'
+            create_date = record.create_date.date()  # Convert Datetime to Date
+            start_date = record.start_date.date()  # Already a Date field
+            days_difference = (start_date - create_date).days  # Calculate difference in days
+
+            if days_difference < 0:
+                record.status_date = 'red'  # Start date is before creation → Overdue
+            elif 0 <= days_difference <= 7:
+                record.status_date = 'yellow'  # Start date is within 7 days of creation
+            else:
+                record.status_date = 'green'
 
     @api.model
     def create(self, vals):
         _logger.info(f"Creating Job Request: {vals}")
-        return super(JobRequest, self).create(vals)
+        job = super(JobRequest, self).create(vals)
+        if job.project_id:
+            job.project_id.write({'job_requests': [(4, job.id)]})  # Add job to the project's job_requests field
+        return job
+
 
     assigned_user_id = fields.Many2one('res.users', string='Assigned User')
     #requested_by = fields.Many2one('res.users', string='Customer', default=lambda self: self.env.user.id)
@@ -75,7 +88,20 @@ class JobRequest(models.Model):
             for record in self:
                 if not record.job_completed:
                     record.job_completed = fields.Datetime.now()
-        return super(JobRequest, self).write(vals)
+
+        for job in self:
+            old_project = job.project_id  # Store old project before update
+            res = super(JobRequest, self).write(vals)
+            new_project = self.project_id if 'project_id' in vals else old_project
+
+            if old_project and old_project != new_project:
+                old_project.write({'job_requests': [(3, job.id)]})  # Remove from old project
+
+            if new_project:
+                new_project.write({'job_requests': [(4, job.id)]})  # Add to new project
+
+        return res
+        # return super(JobRequest, self).write(vals)
 
     # Methods
     def action_accept_job(self):

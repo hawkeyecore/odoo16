@@ -13,6 +13,7 @@
             'views/job_request_views.xml',
             'views/setting_inherit.xml',
             'views/project_monitor_views.xml',
+            'views/show_custom_app.xml',
             #'views/res_users_views.xml',
             #'views/menu.xml',
     ],
