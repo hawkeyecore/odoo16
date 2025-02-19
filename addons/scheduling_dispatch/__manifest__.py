@@ -15,7 +15,7 @@
             'views/project_monitor_views.xml',
             'views/hide_apps_menu.xml',
             'views/hide_odoo_logo.xml',
-            'views/show_custom_app.xml',
+            # 'views/show_custom_app.xml',
             #'views/res_users_views.xml',
             #'views/menu.xml',
     ],

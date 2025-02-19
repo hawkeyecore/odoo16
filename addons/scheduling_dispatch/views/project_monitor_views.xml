@@ -4,6 +4,17 @@
         <field name="res_model">project.monitor</field>
         <field name="view_mode">tree,form</field>
     </record>
+<!--    <record id="view_project_monitor_graph" model="ir.ui.view">-->
+<!--        <field name="name">project.monitor.tree</field>-->
+<!--         <field name="model">project.monitor</field>-->
+<!--         <field name="arch" type="xml">-->
+<!--             <graph string="Project Manager" >-->
+<!--                    <field name="name" />-->
+<!--                    <field name="assigned_customer_id" />-->
+<!--&lt;!&ndash;                    <field name="date" interval="month"/>&ndash;&gt;-->
+<!--                </graph>-->
+<!--         </field>-->
+<!--    </record>-->
 
     <record id="view_project_monitor_tree" model="ir.ui.view">
         <field name="name">project.monitor.tree</field>
