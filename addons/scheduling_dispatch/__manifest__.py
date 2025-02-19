@@ -5,7 +5,7 @@
     'category': 'Custom',
     'summary': 'Manage jobs and employee tasks',
     'description': 'Module to manage Scheduling & Dispatch App with views and portal integration.',
-    'depends': ['base','base_setup'],
+    'depends': ['base','base_setup','web'],
     'data': [
             'security/groups.xml',
             'security/ir.model.access.csv',
@@ -13,6 +13,8 @@
             'views/job_request_views.xml',
             'views/setting_inherit.xml',
             'views/project_monitor_views.xml',
+            'views/hide_apps_menu.xml',
+            'views/hide_odoo_logo.xml',
             'views/show_custom_app.xml',
             #'views/res_users_views.xml',
             #'views/menu.xml',

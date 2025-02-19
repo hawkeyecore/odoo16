@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="custom_web_layout" inherit_id="web.layout">
+        <!-- Replace the title element with a custom title -->
+        <xpath expr="//title" position="replace">
+            <title>Hawkeye</title>
+        </xpath>
+
+        <!-- Update the favicon link to the custom icon -->
+         <xpath expr="//link[@rel='shortcut icon']" position="replace">
+<!--            <link rel="shortcut icon" t-att-href="'/addons/scheduling_dispatch/static/src/hawkeye.png'"/>-->
+        </xpath>
+    </template>
+     <template id="custom_web_login_layout" inherit_id="web.login_layout">
+        <!-- Remove the "Powered by Odoo" block -->
+        <xpath expr="//div[contains(@class, 'text-center') and contains(@class, 'border-top')]" position="replace">
+            <!-- Replace with nothing to remove the element -->
+        </xpath>
+    </template>
+</odoo>

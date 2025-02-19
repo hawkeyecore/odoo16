@@ -12,16 +12,41 @@ class JobRequest(models.Model):
     name = fields.Char(string='Job Title', required=True)
     project_id = fields.Many2one('project.monitor', string="Project")
     description = fields.Text(string='Test() Description')
-    status = fields.Selection([
-        ('new_job', 'New Job'),
-        ('accept_job', 'Accept Job'),
-        ('in_progress', 'In Progress'),
-        ('rescheduled', 'Rescheduled'),
-        ('completed', 'Completed'),
-        ('close', 'Close'),
-    ], string='Status', default='new_job')
+    # status = fields.Selection([
+    #     ('new_job', 'New Job'),
+    #     ('accept_job', 'Accept Job'),
+    #     ('in_progress', 'In Progress'),
+    #     ('rescheduled', 'Rescheduled'),
+    #     ('completed', 'Completed'),
+    #     ('close', 'Close'),
+    # ], string='Status', default='new_job')
+    status = fields.Selection(selection=lambda self: self._get_status_selection(),
+                              string='Status', default='new_job')
 
+    def _get_status_selection(self):
+        # Base options for all users
+        selections = [
+            ('new_job', 'New Job'),
+            ('accept_job', 'Accept Job'),
+            ('in_progress', 'In Progress'),
+            ('rescheduled', 'Rescheduled'),
+            ('completed', 'Completed'),
+        ]
+        # Append 'close' option only if user is a manager
+        if self.env.user.has_group('scheduling_dispatch.group_manager'):
+            selections.append(('close', 'Close'))
+        return selections
 
+    can_edit_job_completed = fields.Boolean(
+        string="Can Edit Job Completed",
+        compute="_compute_can_edit_job_completed",
+        store=True,
+    )
+
+    @api.depends('status')
+    def _compute_can_edit_job_completed(self):
+        for rec in self:
+            rec.can_edit_job_completed = (rec.status == 'close')
 
 
     submitted_by = fields.Many2one(
@@ -91,17 +116,23 @@ class JobRequest(models.Model):
 
         for job in self:
             old_project = job.project_id  # Store old project before update
+            old_status = job.status  # Store old status before update
+
             res = super(JobRequest, self).write(vals)
             new_project = self.project_id if 'project_id' in vals else old_project
+            new_status = vals.get('status', old_status)  # Get new status if updated
 
             if old_project and old_project != new_project:
                 old_project.write({'job_requests': [(3, job.id)]})  # Remove from old project
 
-            if new_project:
+            if new_project and new_status != 'close':
                 new_project.write({'job_requests': [(4, job.id)]})  # Add to new project
 
+            # Remove from job_requests if status is changed to 'close'
+            if new_status == 'close' and job.project_id:
+                job.project_id.write({'job_requests': [(3, job.id)]})
+
         return res
-        # return super(JobRequest, self).write(vals)
 
     # Methods
     def action_accept_job(self):
@@ -109,10 +140,10 @@ class JobRequest(models.Model):
         if self.env.user.id == self.assigned_user_id.id:
             self.status = 'in_progress'
 
-    def action_reassign(self, new_employee_id):
-        """Allow managers to reassign jobs."""
-        if self.env.user.has_group('scheduling_dispatch.group_manager'):
-            self.assigned_user_id = new_employee_id
+    # def action_reassign(self, new_employee_id):
+    #     """Allow managers to reassign jobs."""
+    #     if self.env.user.has_group('scheduling_dispatch.group_manager'):
+    #         self.assigned_user_id = new_employee_id
 
     @api.constrains('start_date', 'end_date')
     def _check_dates(self):
@@ -154,7 +185,10 @@ class JobRequest(models.Model):
             )
             employee_name = (
                 record.assigned_user_id.name
-                if self.env.user.has_group('scheduling_dispatch.group_manager')
+                if self.env.user.has_group('scheduling_dispatch.group_employee')
                 else "Restricted"
             )
-            record.display_name = f"{job_name} - {customer_name} - {employee_name}"
+            if self.env.user.has_group('scheduling_dispatch.group_customer'):
+                record.display_name = f"{job_name} - {customer_name} "
+            else:
+                record.display_name = f"{job_name} - {customer_name} - {employee_name}"

@@ -6,19 +6,20 @@
     </record>
 
     <record id="view_project_monitor_tree" model="ir.ui.view">
-        <field name="name">Project Monitor</field>
+        <field name="name">project.monitor.tree</field>
         <field name="model">project.monitor</field>
         <field name="arch" type="xml">
-            <tree string="Project Monitor"
-
-             >
+            <tree string="Project Monitor" import="false">
                 <field name="name"/>
-                <field name="job_requests" widget="many2many_tags"/>
-                <field name="assigned_customer_id"/>
-                <field  decoration-warning="next_7_days &gt; 0" name="next_7_days"/>
-                <field decoration-success="after_7_days &gt; 0" name="after_7_days"/>
-                <field  decoration-danger="overdue_jobs &gt; 0" name="overdue_jobs"/>
-                <field name="total_jobs"/>
+                <field name="job_requests" invisible="1" widget="many2many_tags"/>
+                <field name="assigned_customer_id" class="fw-bolder"/>
+                <!--                <field  decoration-warning="next_7_days &gt; 0" name="next_7_days" class="fw-bolder"/>-->
+                <!--                <field decoration-success="after_7_days &gt; 0" name="after_7_days" class="fw-bolder"/>-->
+                <!--                <field  decoration-danger="overdue_jobs &gt; 0" name="overdue_jobs" class="fw-bolder"/>-->
+                <field name="next_7_days" class="fw-bolder"/>
+                <field name="after_7_days" class="fw-bolder"/>
+                <field name="overdue_jobs" class="fw-bolder"/>
+                <field name="total_jobs" class="fw-bolder"/>
             </tree>
         </field>
     </record>
@@ -33,7 +34,7 @@
 
                         <group>
                             <field name="name"/>
-                            <field name="job_requests" options="{'no_create': True}" widget="many2many_tags"/>
+                            <field name="job_requests" invisible="1" options="{'no_create': True}" widget="many2many_tags"/>
                             <field name="assigned_customer_id"
                             />
 
@@ -65,7 +66,13 @@
                     <field name="user_projects" readonly="1">
                         <tree>
                             <field name="name"/>
-                            <field name="job_requests" widget="many2many_tags"/>
+                            <field name="job_requests" widget="many2many_tags" invisible="1"/>
+
+                            <field name="next_7_days"/>
+                            <field name="after_7_days"/>
+                            <field name="overdue_jobs"/>
+                            <field name="total_jobs"/>
+
                         </tree>
                     </field>
                 </page>

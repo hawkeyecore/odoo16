@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        <record model="ir.ui.menu" id="base.menu_apps">-->
+        <!--            <field name="active">False</field>-->
+        <!--        </record>-->
+        <record id="hide_module_filters" model="ir.ui.view">
+            <field name="name">Hide Module Filters</field>
+            <field name="model">ir.module.module</field>
+            <field name="inherit_id" ref="base.view_module_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search" position="replace">
+                    <search string="Search modules">
+                        <!-- No filters, just an empty search view -->
+                    </search>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_totp_form_inherit" model="ir.ui.view">
+            <field name="name">res.users form: update totp security page label</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="auth_totp.view_totp_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='security']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_users_tree_inherit" model="ir.ui.view">
+            <field name="name">res.users.tree.inherit.import_disabled</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="import">false</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_company_tree_inherit" model="ir.ui.view">
+            <field name="name">res.users.company.inherit.import_disabled</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="import">false</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

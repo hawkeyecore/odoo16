@@ -8,7 +8,7 @@ class ProjectMonitor(models.Model):
     name = fields.Char(string="Project Name")
     job_requests = fields.Many2many('job.request', string="Job Requests")
 
-    total_jobs = fields.Integer(string="Total Jobs", compute="_compute_job_counts", store=True)
+    total_jobs = fields.Integer(string="Total Open Jobs", compute="_compute_job_counts", store=True)
     next_7_days = fields.Integer(string="Next 7 Days Jobs", compute="_compute_job_counts", store=True)
     after_7_days = fields.Integer(string="After 7 Days Jobs", compute="_compute_job_counts", store=True)
     overdue_jobs = fields.Integer(string="Overdue Jobs", compute="_compute_job_counts", store=True)
@@ -17,6 +17,8 @@ class ProjectMonitor(models.Model):
     def _compute_job_counts(self):
         for record in self:
             total = len(record.job_requests)
+            # open_jobs = record.job_requests.filtered(lambda job: job.status != 'close')
+            # total = len(open_jobs)
             next_7_days_count = 0
             after_7_days_count = 0
             overdue_count = 0
