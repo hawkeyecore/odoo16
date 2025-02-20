@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!--        <record model="ir.ui.menu" id="base.menu_apps">-->
-        <!--            <field name="active">False</field>-->
-        <!--        </record>-->
+<!--        <menuitem id="base.menu_module_tree" active="False"/>-->
+        <record id="base.menu_module_tree" model="ir.ui.menu">
+            <field name="name">‎</field>
+        </record>
+        <menuitem id="base.menu_theme_store" active="False"/>
+        <menuitem id="base.menu_third_party" active="False"/>
+
         <record id="hide_module_filters" model="ir.ui.view">
             <field name="name">Hide Module Filters</field>
             <field name="model">ir.module.module</field>
@@ -13,6 +17,17 @@
                     <search string="Search modules">
                         <!-- No filters, just an empty search view -->
                     </search>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_users_form_simple_modif_inherit" model="ir.ui.view">
+            <field name="name">res.users.preferences.form.inherit</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[2]" position="attributes">
+                    <attribute name="invisible">1</attribute>
                 </xpath>
             </field>
         </record>

@@ -24,12 +24,12 @@
                 <field name="name"/>
                 <field name="job_requests" invisible="1" widget="many2many_tags"/>
                 <field name="assigned_customer_id" class="fw-bolder"/>
-                <!--                <field  decoration-warning="next_7_days &gt; 0" name="next_7_days" class="fw-bolder"/>-->
-                <!--                <field decoration-success="after_7_days &gt; 0" name="after_7_days" class="fw-bolder"/>-->
-                <!--                <field  decoration-danger="overdue_jobs &gt; 0" name="overdue_jobs" class="fw-bolder"/>-->
-                <field name="next_7_days" class="fw-bolder"/>
-                <field name="after_7_days" class="fw-bolder"/>
-                <field name="overdue_jobs" class="fw-bolder"/>
+                <field  decoration-warning="next_7_days &gt; 0" name="next_7_days" class="fw-bolder"/>
+                <field decoration-success="after_7_days &gt; 0" name="after_7_days" class="fw-bolder"/>
+                <field  decoration-danger="overdue_jobs &gt; 0" name="overdue_jobs" class="fw-bolder"/>
+<!--                <field name="next_7_days" class="fw-bolder"/>-->
+                <!--                <field name="after_7_days" class="fw-bolder"/>-->
+                <!--                <field name="overdue_jobs" class="fw-bolder"/>-->
                 <field name="total_jobs" class="fw-bolder"/>
             </tree>
         </field>

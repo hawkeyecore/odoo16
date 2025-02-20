@@ -140,10 +140,10 @@ class JobRequest(models.Model):
         if self.env.user.id == self.assigned_user_id.id:
             self.status = 'in_progress'
 
-    # def action_reassign(self, new_employee_id):
-    #     """Allow managers to reassign jobs."""
-    #     if self.env.user.has_group('scheduling_dispatch.group_manager'):
-    #         self.assigned_user_id = new_employee_id
+    def action_reassign(self, new_employee_id):
+        """Allow managers to reassign jobs."""
+        if self.env.user.has_group('scheduling_dispatch.group_manager'):
+            self.assigned_user_id = new_employee_id
 
     @api.constrains('start_date', 'end_date')
     def _check_dates(self):
