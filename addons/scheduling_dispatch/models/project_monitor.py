@@ -5,7 +5,7 @@ class ProjectMonitor(models.Model):
     _name = 'project.monitor'
     _description = 'Project Monitor'
 
-    name = fields.Char(string="Project Name")
+    name = fields.Char(string="Project Name",index=True, tracking=True)
     job_requests = fields.Many2many('job.request', string="Job Requests")
 
     total_jobs = fields.Integer(string="Total Open Jobs", compute="_compute_job_counts", store=True)

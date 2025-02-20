@@ -7,9 +7,9 @@
         </xpath>
 
         <!-- Instead of replacing, insert the new favicon inside <head> -->
-        <xpath expr="//head" position="inside">
-            <link rel="shortcut icon" t-att-href="'/addons/scheduling_dispatch/static/src/hawkeye.png'"/>
-        </xpath>
+<!--        <xpath expr="//head" position="inside">-->
+<!--            <link rel="shortcut icon" t-att-href="'/addons/scheduling_dispatch/static/src/hawkeye.png'"/>-->
+<!--        </xpath>-->
     </template>
     <template id="custom_web_login_layout" inherit_id="web.login_layout">
         <!-- Remove the "Powered by Odoo" block -->
