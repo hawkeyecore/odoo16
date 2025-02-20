@@ -181,7 +181,7 @@ class JobRequest(models.Model):
             customer_name = (
                 record.submitted_by.name
                 if self.env.user.has_group('scheduling_dispatch.group_manager')
-                else "Restricted"
+                else ""
             )
             employee_name = (
                 record.assigned_user_id.name
