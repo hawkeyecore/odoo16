@@ -185,8 +185,8 @@ class JobRequest(models.Model):
             )
             employee_name = (
                 record.assigned_user_id.name
-                if self.env.user.has_group('scheduling_dispatch.group_employee')
-                else "Restricted"
+                # if self.env.user.has_group('scheduling_dispatch.group_employee')
+                # else "Restricted"
             )
             if self.env.user.has_group('scheduling_dispatch.group_customer'):
                 record.display_name = f"{job_name} - {customer_name} "
