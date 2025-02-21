@@ -170,7 +170,7 @@ class JobRequest(models.Model):
     display_name = fields.Char(
         string='Display Name',
         compute='_compute_display_name',
-        store=True,
+        store=False,
         readonly=True
     )
 
@@ -178,17 +178,12 @@ class JobRequest(models.Model):
     def _compute_display_name(self):
         for record in self:
             job_name = record.name or "Missing Job Title"
-            customer_name = (
-                record.submitted_by.name
-                if self.env.user.has_group('scheduling_dispatch.group_manager')
-                else ""
-            )
-            employee_name = (
-                record.assigned_user_id.name
-                # if self.env.user.has_group('scheduling_dispatch.group_employee')
-                # else "Restricted"
-            )
+            customer_name = record.submitted_by.name if record.submitted_by else ""
+
+            # Dynamically hide employee name for customers
             if self.env.user.has_group('scheduling_dispatch.group_customer'):
-                record.display_name = f"{job_name} - {customer_name} "
+                employee_name = ""
             else:
-                record.display_name = f"{job_name} - {customer_name} - {employee_name}"
+                employee_name = record.assigned_user_id.name if record.assigned_user_id else ""
+
+            record.display_name = f"{job_name} - {customer_name} - {employee_name}"
