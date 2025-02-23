@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_job_request_customer,Customer Access,model_job_request,custom_module.group_customer,1,1,1,0
-access_job_request_manager,Manager Access,model_job_request,custom_module.group_manager,1,1,1,1
-access_job_request_employee,Employee Access,model_job_request,custom_module.group_employee,1,1,0,0

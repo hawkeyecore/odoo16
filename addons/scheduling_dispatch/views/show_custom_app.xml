@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <record id="view_module_form_custom" model="ir.ui.view">-->
+<!--        <field name="name">module.form.custom</field>-->
+<!--        <field name="model">ir.module.module</field>-->
+<!--        <field name="inherit_id" ref="base.module_form"/>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <xpath expr="//form" position="attributes">-->
+<!--                <attribute name="domain">[('author', '=', 'Hawkeye core')]</attribute>-->
+<!--            </xpath>-->
+<!--        </field>-->
+<!--    </record>-->
+     <record id="base.open_module_tree" model="ir.actions.act_window">
+        <field name="domain">[('shortdesc', '=', 'Scheduling &amp; Dispatch App')]</field>
+    </record>
+</odoo>
