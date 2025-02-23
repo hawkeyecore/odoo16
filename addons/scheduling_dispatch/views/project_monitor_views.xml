@@ -4,18 +4,22 @@
         <field name="res_model">project.monitor</field>
         <field name="view_mode">tree,form</field>
     </record>
-<!--    <record id="view_project_monitor_graph" model="ir.ui.view">-->
-<!--        <field name="name">project.monitor.tree</field>-->
-<!--         <field name="model">project.monitor</field>-->
-<!--         <field name="arch" type="xml">-->
-<!--             <graph string="Project Manager" >-->
-<!--                    <field name="name" />-->
-<!--                    <field name="assigned_customer_id" />-->
-<!--&lt;!&ndash;                    <field name="date" interval="month"/>&ndash;&gt;-->
-<!--                </graph>-->
-<!--         </field>-->
-<!--    </record>-->
-
+    <!-- <record id="view_project_monitor_graph" model="ir.ui.view">
+            <field name="name">project.monitor.graph</field>
+            <field name="model">project.monitor</field>
+            <field name="arch" type="xml">
+                <form string="Project Monitor">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>Project Monitor Chart</h1>
+                        </div>
+                        <div class="custom_chart_container">
+                            <canvas id="projectMonitorChart" width="800" height="400"></canvas>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record> -->
     <record id="view_project_monitor_tree" model="ir.ui.view">
         <field name="name">project.monitor.tree</field>
         <field name="model">project.monitor</field>
@@ -24,9 +28,9 @@
                 <field name="name"/>
                 <field name="job_requests" invisible="1" widget="many2many_tags"/>
                 <field name="assigned_customer_id" class="fw-bolder"/>
-                <field  decoration-warning="next_7_days &gt; 0" name="next_7_days" class="fw-bolder"/>
-                <field decoration-success="after_7_days &gt; 0" name="after_7_days" class="fw-bolder"/>
-                <field  decoration-danger="overdue_jobs &gt; 0" name="overdue_jobs" class="fw-bolder"/>
+                <field  decoration-warning="next_7_days &gt; 0" name="next_7_days" class="fw-bolder next_7_days_column"/>
+                <field decoration-success="after_7_days &gt; 0" name="after_7_days" class="fw-bolder after_7_days_column"/>
+                <field  decoration-danger="overdue_jobs &gt; 0" name="overdue_jobs" class="fw-bolder overdue_jobs_column"/>
 <!--                <field name="next_7_days" class="fw-bolder"/>-->
                 <!--                <field name="after_7_days" class="fw-bolder"/>-->
                 <!--                <field name="overdue_jobs" class="fw-bolder"/>-->
