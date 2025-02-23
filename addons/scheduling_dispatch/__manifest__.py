@@ -23,8 +23,9 @@
         'web.assets_backend': [
             'scheduling_dispatch/static/src/js_inherit.xml',
             'scheduling_dispatch/static/src/js/favicon.js',
-            '/scheduling_dispatch/static/lib/chart.js',
-            '/scheduling_dispatch/static/src/js/project_monitor_chart.js',
+            '/scheduling_dispatch/static/src/css/project_monitor.css',
+            # '/scheduling_dispatch/static/lib/chart.js',
+            # '/scheduling_dispatch/static/src/js/project_monitor_chart.js',
         ],
 
     },

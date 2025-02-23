@@ -1,0 +1,20 @@
+/* Background color for Next 7 Days Jobs column */
+.o_list_view .next_7_days_jobs {
+    background-color: rgba(255, 0, 0, 0.7) !important; /* Red */
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Background color for After 7 Days Jobs column */
+.o_list_view .after_7_days_jobs {
+    background-color: rgba(255, 255, 0, 0.7) !important; /* Yellow */
+    color: black !important;
+    font-weight: bold;
+}
+
+/* Background color for Overdue Jobs column */
+.o_list_view .overdue_jobs {
+    background-color: rgba(0, 128, 0, 0.7) !important; /* Green */
+    color: white !important;
+    font-weight: bold;
+}
