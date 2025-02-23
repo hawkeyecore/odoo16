@@ -6,4 +6,18 @@
                      <attribute name="class">d-none</attribute>
               </xpath>
        </t>
+    <t t-name="web_Dialog_header_inherit" owl="1" t-inherit="web.Dialog.header" t-inherit-mode="extension">
+          <xpath expr="h4[@class='modal-title text-break']" position="replace">
+                 <h4 class="modal-title text-break" t-att-class="{ 'me-auto': fullscreen }">
+                    New Job
+                </h4>
+          </xpath>
+    </t>
+    <t t-name="web_CalendarQuickCreate_inherit" owl="1" t-inherit="web.CalendarQuickCreate" t-inherit-mode="extension">
+          <xpath expr="//label[@class='col-form-label o_form_label']" position="replace">
+                <label for="title" class="col-form-label o_form_label">
+                    New Job
+                </label>
+          </xpath>
+    </t>
 </templates>
