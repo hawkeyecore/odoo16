@@ -6,4 +6,14 @@
             <!-- Replace with nothing to remove the element -->
         </xpath>
     </template>
+    <template id="custom_web_title" inherit_id="web.layout">
+        <xpath expr="//title" position="replace">
+            <title>Hawkeye</title>
+        </xpath>
+    </template>
+    <template id="custom_web_icon" inherit_id="web.layout">
+        <xpath expr="//link" position="replace">
+            <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/scheduling_dispatch/static/src/hawkeye.png'"/>
+        </xpath>
+    </template>
 </odoo>
