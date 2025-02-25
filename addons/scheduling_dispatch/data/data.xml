@@ -9,7 +9,7 @@
             <field name="job_completed"/>
         </record>
     </data>
-    <record id="taskmetoday_app.group_customer" model="res.groups">
+    <record id="scheduling_dispatch.group_customer" model="res.groups">
         <field name="category_id" ref="category_management_roles"/>
     </record>
 </odoo>

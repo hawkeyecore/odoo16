@@ -1,10 +1,10 @@
 {
-    'name': 'TaskMeToday App',
+    'name': 'Scheduling & Dispatch App',
     'version': '1.0',
     'author': 'Hawkeye core',
     'category': 'Custom',
     'summary': 'Manage jobs and employee tasks',
-    'description': 'Module to manage TaskMeToday App with views and portal integration.',
+    'description': 'Module to manage Scheduling & Dispatch App with views and portal integration.',
     'depends': ['base','base_setup','web'],
     'data': [
             'security/groups.xml',
@@ -21,10 +21,11 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'taskmetoday_app/static/src/js_inherit.xml',
-            'taskmetoday_app/static/src/js/favicon.js',
-            '/taskmetoday_app/static/src/css/project_monitor.css',
-            #'/taskmetoday_app/static/src/js/project_monitor_chart.js',
+            'scheduling_dispatch/static/src/js_inherit.xml',
+            'scheduling_dispatch/static/src/js/favicon.js',
+            '/scheduling_dispatch/static/src/css/project_monitor.css',
+            # '/scheduling_dispatch/static/lib/chart.js',
+            # '/scheduling_dispatch/static/src/js/project_monitor_chart.js',
         ],
 
     },

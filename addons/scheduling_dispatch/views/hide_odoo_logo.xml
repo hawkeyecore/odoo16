@@ -8,12 +8,12 @@
     </template>
     <template id="custom_web_title" inherit_id="web.layout">
         <xpath expr="//title" position="replace">
-            <title>TaskMeToday App</title>
+            <title>Hawkeye</title>
         </xpath>
     </template>
     <template id="custom_web_icon" inherit_id="web.layout">
         <xpath expr="//link" position="replace">
-            <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/taskmetoday_app/static/src/TaskMeToday.png'"/>
+            <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/scheduling_dispatch/static/src/hawkeye.png'"/>
         </xpath>
     </template>
 </odoo>
