@@ -13,7 +13,7 @@
     </template>
     <template id="custom_web_icon" inherit_id="web.layout">
         <xpath expr="//link" position="replace">
-            <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/scheduling_dispatch/static/src/TaskMeToday.png'"/>
+            <link type="image/x-icon" rel="shortcut icon" t-att-href="x_icon or '/TaskMeToday_app/static/src/TaskMeToday.png'"/>
         </xpath>
     </template>
 </odoo>
