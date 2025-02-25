@@ -1,6 +1,15 @@
 /** @odoo-module **/
 import { Component, useState, onMounted } from "@odoo/owl";
 
+// Ensure Chart.js is loaded from CDN if it's not already available
+if (!window.Chart) {
+    const script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/chart.js";
+    script.async = true;
+    script.onload = () => console.log("Chart.js Loaded Successfully");
+    document.head.appendChild(script);
+}
+
 export class ProjectMonitorChart extends Component {
     setup() {
         this.data = useState({ projects: [] });
@@ -9,7 +18,8 @@ export class ProjectMonitorChart extends Component {
 
     async fetchData() {
         const response = await this.rpc("/project_monitor_chart_data");
-        this.data.projects = response;
+        this.data.projects = await response.json();  // Ensure data is properly fetched
+        console.log("Fetched Data:", this.data.projects); // Debugging
     }
 
     async renderChart() {
