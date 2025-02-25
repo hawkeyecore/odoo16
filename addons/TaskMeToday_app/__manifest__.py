@@ -21,10 +21,10 @@
     ],
     'assets': {
         'web.assets_backend': [
-            'TaskMeToday_app/static/src/js_inherit.xml',
-            'TaskMeToday_app/static/src/js/favicon.js',
-            '/TaskMeToday_app/static/src/css/project_monitor.css',
-            #'/TaskMeToday_app/static/src/js/project_monitor_chart.js',
+            'taskmetoday_app/static/src/js_inherit.xml',
+            'taskmetoday_app/static/src/js/favicon.js',
+            '/taskmetoday_app/static/src/css/project_monitor.css',
+            #'/taskmetoday_app/static/src/js/project_monitor_chart.js',
         ],
 
     },

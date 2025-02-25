@@ -52,8 +52,8 @@
     </record>
 
     <menuitem id="menu_project_monitor" name="Project Manager" 
-              parent="TaskMeToday_app.menu_job_request_root"
-              groups="TaskMeToday_app.group_manager"
+              parent="taskmetoday_app.menu_job_request_root"
+              groups="taskmetoday_app.group_manager"
               action="action_project_monitor" sequence="40"/>
 
     <record id="res_users_form_view_inherit" model="ir.ui.view">

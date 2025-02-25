@@ -40,7 +40,7 @@ class JobRequest(models.Model):
             ('completed', 'Completed'),
         ]
         # Append 'close' option only if user is a manager
-        if self.env.user.has_group('TaskMeToday_app.group_manager'):
+        if self.env.user.has_group('taskmetoday_app.group_manager'):
             selections.append(('close', 'Close'))
         return selections
 
@@ -149,7 +149,7 @@ class JobRequest(models.Model):
 
     def action_reassign(self, new_employee_id):
         """Allow managers to reassign jobs."""
-        if self.env.user.has_group('TaskMeToday_app.group_manager'):
+        if self.env.user.has_group('taskmetoday_app.group_manager'):
             self.assigned_user_id = new_employee_id
 
     @api.constrains('start_date', 'end_date')
@@ -159,7 +159,7 @@ class JobRequest(models.Model):
                 raise ValidationError("The start date cannot be after the end date.")
 
     def action_complete_job(self):
-        if self.env.user.has_group('TaskMeToday_app.group_manager'):
+        if self.env.user.has_group('taskmetoday_app.group_manager'):
             self.status = 'completed'
 
     @api.depends('status')
@@ -188,7 +188,7 @@ class JobRequest(models.Model):
             customer_name = record.submitted_by.name if record.submitted_by else ""
 
             # Dynamically hide employee name for customers
-            if self.env.user.has_group('TaskMeToday_app.group_customer'):
+            if self.env.user.has_group('taskmetoday_app.group_customer'):
                 employee_name = ""
             else:
                 employee_name = record.assigned_user_id.name if record.assigned_user_id else ""
