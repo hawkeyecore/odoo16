@@ -1,10 +1,10 @@
 {
-    'name': 'Scheduling & Dispatch App',
+    'name': 'TaskMeToday App',
     'version': '1.0',
-    'author': 'Hawkeye core',
+    'author': 'Hawkeye Core',
     'category': 'Custom',
     'summary': 'Manage jobs and employee tasks',
-    'description': 'Module to manage Scheduling & Dispatch App with views and portal integration.',
+    'description': 'Module to manage TaskMeToday App with views and portal integration.',
     'depends': ['base','base_setup','web'],
     'data': [
             'security/groups.xml',
