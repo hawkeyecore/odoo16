@@ -1,7 +1,7 @@
 {
     'name': 'TaskMeToday App',
     'version': '1.0',
-    'author': 'Hawkeye Core',
+    'author': 'TaskMeToday App',
     'category': 'Custom',
     'summary': 'Manage jobs and employee tasks',
     'description': 'Module to manage TaskMeToday App with views and portal integration.',
