@@ -9,7 +9,14 @@ class JobRequest(models.Model):
     _name = 'job.request'
     _description = 'Job Request'
 
-    name = fields.Char(string='Job Title', required=True)
+    #name = fields.Char(string='Job Title', required=True)
+    name = fields.Selection([
+    ('manager', 'Manager'),
+    ('supervisor', 'Supervisor'),
+    ('technician', 'Technician'),
+    ('assistant', 'Assistant')
+    ], string='Job Title', required=True)
+    
     project_id = fields.Many2one('project.monitor', string="Project")
     description = fields.Text(string='Test() Description')
     # status = fields.Selection([
