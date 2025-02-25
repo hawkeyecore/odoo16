@@ -21,50 +21,50 @@
             </field>
         </record> -->
     <record id="view_project_monitor_tree" model="ir.ui.view">
-        <field name="name">project.monitor.tree</field>
-        <field name="model">project.monitor</field>
-        <field name="arch" type="xml">
-            <tree string="Project Monitor" import="false">
-                <field name="name"/>
-                <field name="job_requests" invisible="1" widget="many2many_tags"/>
-                <field name="assigned_customer_id" class="fw-bolder"/>
-                <field  decoration-warning="next_7_days &gt; 0" name="next_7_days" class="fw-bolder next_7_days_column"/>
-                <field decoration-success="after_7_days &gt; 0" name="after_7_days" class="fw-bolder after_7_days_column"/>
-                <field  decoration-danger="overdue_jobs &gt; 0" name="overdue_jobs" class="fw-bolder overdue_jobs_column"/>
-<!--                <field name="next_7_days" class="fw-bolder"/>-->
-                <!--                <field name="after_7_days" class="fw-bolder"/>-->
-                <!--                <field name="overdue_jobs" class="fw-bolder"/>-->
-                <field name="total_jobs" class="fw-bolder"/>
-            </tree>
-        </field>
-    </record>
+            <field name="name">project.monitor.tree</field>
+            <field name="model">project.monitor</field>
+            <field name="arch" type="xml">
+                <tree string="Project Monitor" import="false">
+                    <field name="name"/>
+                    <field name="job_requests" invisible="1" widget="many2many_tags"/>
+                    <field name="assigned_customer_id" class="fw-bolder"/>
+                    <field decoration-warning="next_7_days &gt; 0" name="next_7_days" class="fw-bolder next_7_days_column"/>
+                    <field decoration-success="after_7_days &gt; 0" name="after_7_days" class="fw-bolder after_7_days_column"/>
+                    <field decoration-danger="overdue_jobs &gt; 0" name="overdue_jobs" class="fw-bolder overdue_jobs_column"/>
+                    <field name="total_jobs" class="fw-bolder"/>
+                </tree>
+            </field>
+        </record>
+    
     <record id="view_project_monitor_form" model="ir.ui.view">
-        <field name="name">project.monitor.form</field>
-        <field name="model">project.monitor</field>
-        <field name="arch" type="xml">
-            <form>
-                <sheet>
-                    <group>
-
-
+            <field name="name">project.monitor.form</field>
+            <field name="model">project.monitor</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <!-- Chart Appears First -->
+                        <div class="custom_chart_container">
+                            <canvas id="projectMonitorChart" width="800" height="400"></canvas>
+                        </div>
+                        
+                        <!-- Table Appears Below Chart -->
                         <group>
-                            <field name="name"/>
-                            <field name="job_requests" invisible="1" options="{'no_create': True}" widget="many2many_tags"/>
-                            <field name="assigned_customer_id"
-                            />
-
+                            <group>
+                                <field name="name"/>
+                                <field name="job_requests" invisible="1" options="{'no_create': True}" widget="many2many_tags"/>
+                                <field name="assigned_customer_id"/>
+                            </group>
+                            <group>
+                                <field name="total_jobs"/>
+                                <field name="next_7_days"/>
+                                <field name="after_7_days"/>
+                                <field name="overdue_jobs"/>
+                            </group>
                         </group>
-                        <group>
-                            <field name="total_jobs"/>
-                            <field name="next_7_days"/>
-                            <field name="after_7_days"/>
-                            <field name="overdue_jobs"/>
-                        </group>
-                    </group>
-                </sheet>
-            </form>
-        </field>
-    </record>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
     <menuitem id="menu_project_monitor" name="Project Manager" parent="scheduling_dispatch.menu_job_request_root"
               groups="scheduling_dispatch.group_manager"
@@ -80,17 +80,14 @@
                         <tree>
                             <field name="name"/>
                             <field name="job_requests" widget="many2many_tags" invisible="1"/>
-
                             <field name="next_7_days"/>
                             <field name="after_7_days"/>
                             <field name="overdue_jobs"/>
                             <field name="total_jobs"/>
-
                         </tree>
                     </field>
                 </page>
             </page>
         </field>
     </record>
-
 </odoo>

@@ -18,3 +18,10 @@
     color: white !important;
     font-weight: bold;
 }
+/* Style for Chart Container */
+.custom_chart_container {
+    width: 100%;
+    margin-bottom: 20px; /* Space between chart and table */
+    display: flex;
+    justify-content: center;
+}
