@@ -8,7 +8,7 @@
     </template>
     <template id="custom_web_title" inherit_id="web.layout">
         <xpath expr="//title" position="replace">
-            <title>TaskMeToday</title>
+            <title>TaskMeToday App</title>
         </xpath>
     </template>
     <template id="custom_web_icon" inherit_id="web.layout">
