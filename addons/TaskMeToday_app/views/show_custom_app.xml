@@ -11,6 +11,6 @@
 <!--        </field>-->
 <!--    </record>-->
      <record id="base.open_module_tree" model="ir.actions.act_window">
-        <field name="domain">[('shortdesc', '=', 'Scheduling &amp; Dispatch App')]</field>
+        <field name="domain">[('shortdesc', '=', 'TaskMeToday App')]</field>
     </record>
 </odoo>
